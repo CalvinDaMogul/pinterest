@@ -1,20 +1,35 @@
 import boardsData from '../../helpers/data/boardsData';
 import util from '../../helpers/utils';
 
+const seePinDiv = (e) => {
+  const boardId = e.target.closest('.card').id;
+  console.error('you clicked a button', boardId);
+  document.getElementById('boards-page').classList.add('hide');
+  document.getElementById('pins-page').classList.remove('hide');
+};
+
+const bindEvents = () => {
+  const allButtons = document.getElementsByClassName('see-pins');
+  console.error('allButtons', allButtons);
+  for (let i = 0; i < allButtons.length; i += 1) {
+    allButtons[i].addEventListener('click', seePinDiv);
+  }
+};
+
 const boardBuilder = (boardName) => {
   let domString = '';
   boardName.forEach((board) => {
-    domString += '<div class="card col-3">';
-    domString += `<div class="card-body" id=${board.id}>`;
+    domString += '<div class=" col-3">';
+    domString += `<div id="${board.id}" class="card p-2">`;
     domString += `<h5 class="card-title">${board.name}</h5>`;
-    domString += '<p class="card-text"></p>';
-    domString += '<p class="card-text"></p>';
+    domString += '<button class="btn btn-warning see-pins">pins</button>';
     domString += '<p class="card-text"></p>';
     domString += '<p class="card-text"></p>';
     domString += '</div>';
     domString += '</div>';
   });
   util.printToDom('user-boards', domString);
+  bindEvents();
 };
 
 

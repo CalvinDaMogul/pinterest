@@ -5,7 +5,6 @@ import '../styles/main.scss';
 
 const init = () => {
   boards.initBoards();
-  boards.boardBuilder();
 };
 
 init();
